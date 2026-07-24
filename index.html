@@ -209,7 +209,7 @@ document.getElementById("bells").onclick=()=>{ window.open("https://youtu.be/Wir
 const categories = [
     {start:0,end:76,btn:".btn-credinta"},
     {start:77,end:134,btn:".btn-nadejdea"},
-    {start:135,end:199,btn:".btn-dragostea"}
+    {start:148,end:212,btn:".btn-dragostea"}
 ];
 
 let catIndex=0, current=0;
@@ -269,21 +269,29 @@ document.addEventListener('touchend',e=>{
     if(touchendY+40<touchstartY) hideAnswer();
 });
 
-document.querySelector(".btn-credinta").onclick=()=>fetch("https://script.google.com/macros/s/AKfycbxl7ksSYe3YZ_5ijkoDp94ugCEGNcRYZ0Tz69tNF3PCbbx7UCC4JsVlWhXYUDp472fy/exec")
-.then(r=>r.json()).then(data=>{
-catehismData=data.map(x=>({q:x.q,a:x.a}));
-categories[2].end=catehismData.length-1;
-activateCategory(0);
-}).catch(e=>{q.innerText="Eroare API";a.innerText=String(e);});
+fetch("catehism.json")
+.then(r=>r.json())
+.then(data=>{
+
+    catehismData=data.map(x=>({
+        q:x.q,
+        a:x.a
+    }));
+
+    categories[2].end=catehismData.length-1;
+
+    activateCategory(0);
+
+})
+.catch(e=>{
+    q.innerText="Eroare JSON";
+    a.innerText=String(e);
+});
+
+
+document.querySelector(".btn-credinta").onclick=()=>activateCategory(0);
 document.querySelector(".btn-nadejdea").onclick=()=>activateCategory(1);
 document.querySelector(".btn-dragostea").onclick=()=>activateCategory(2);
-
-fetch("https://script.google.com/macros/s/AKfycbxl7ksSYe3YZ_5ijkoDp94ugCEGNcRYZ0Tz69tNF3PCbbx7UCC4JsVlWhXYUDp472fy/exec")
-.then(r=>r.json()).then(data=>{
-catehismData=data.map(x=>({q:x.q,a:x.a}));
-categories[2].end=catehismData.length-1;
-activateCategory(0);
-}).catch(e=>{q.innerText="Eroare API";a.innerText=String(e);});
 
 let interval=null, time=1500, running=false, isWork=true;
 const timerDiv=document.getElementById("pomodoroTime");
