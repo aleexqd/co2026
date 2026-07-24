@@ -2,65 +2,297 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>☦️ Catehism Ortodox</title>
+<title>☦️CATEHISM ORTODOX</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-body{margin:0;font-family:Georgia,serif;background:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80') center/cover fixed;color:#f5e8c8}
-.overlay{background:rgba(0,0,0,.72);min-height:100vh;display:flex;justify-content:center;align-items:center}
-.card{width:min(900px,92%);background:rgba(25,20,15,.92);padding:24px;border-radius:18px;box-shadow:0 0 30px #000}
-h1{text-align:center}
-#question{font-size:28px;font-weight:bold;cursor:pointer}
-#answer{margin-top:18px;font-size:21px;display:none;line-height:1.6}
-.nav{display:flex;justify-content:space-between;margin-top:24px}
-button{padding:10px 18px;font-size:18px;border-radius:10px;cursor:pointer}
-#info{text-align:center;margin-top:10px;opacity:.8}
+html, body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    font-family:'Cormorant Garamond',serif;
+    background-image:url("PEISAJ.jpg");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:#f2e6c9;
+    height:100%;
+}
+.overlay{
+    min-height:100vh;
+    background:rgba(8,8,8,0.84);
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:20px;
+    position: relative;
+    z-index: 10;
+}
+.card{
+    max-width:900px;
+    width:100%;
+    background:rgba(18,14,10,0.92);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 0 40px rgba(0,0,0,0.85);
+    margin-top:220px; 
+}
+.page-indicator{
+    text-align:center;
+    margin-top:12px;
+    font-size:18px;
+    opacity:0.35;
+}
+.question{
+    font-size:20px;
+    font-weight:600;
+    padding:14px;
+    border-radius:12px;
+    background:rgba(255,215,140,0.08);
+    cursor:pointer;
+}
+.answer{
+    margin-top:12px;
+    font-size:18px;
+    line-height:1.5;
+    padding:14px;
+    border-radius:12px;
+    background:rgba(255,215,140,0.06);
+    max-height:0;
+    overflow:hidden;
+    display:none;
+    opacity:0;
+    transition:max-height 0.15s ease, opacity 0.15s ease;
+}
+
+/* NAV */
+.nav-text{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+    font-size:24px;
+    opacity:0.55;
+    user-select:none;
+}
+.nav-text span{ cursor:pointer; }
+.nav-text span:hover{ opacity:0.9; }
+
+/* WIDGETE */
+.widget{
+    position:fixed;
+    background:rgba(18,14,10,0.95);
+    border:1px solid #c9a24d;
+    border-radius:12px;
+    padding:8px;
+    font-size:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.7);
+}
+#pomodoro{ top:10px; left:10px; display:flex; align-items:center; gap:5px; z-index:20; }
+#pomodoroTime{ font-size:20px; font-weight:bold; min-width:50px; text-align:center; color:#f5deb3; }
+#pomodoro button{
+    padding:3px 6px;
+    font-size:11px;
+    border-radius:6px;
+    border:1px solid #b89b55;
+    background:linear-gradient(180deg,#4a3820,#2e2314);
+    color:#f2e6c9;
+    cursor:pointer;
+}
+#pomodoro button:hover{
+    background:linear-gradient(180deg,#5a4528,#3a2c18);
+}
+
+/* CLOPOTE */
+#bells{
+    top:10px;
+    right:10px;
+    width:50px;
+    height:50px;
+    padding:0;
+    cursor:pointer;
+    border-radius:10px;
+    border:1px solid #c9a24d;
+    z-index:20;
+}
+#bells img{ width:100%; height:100%; border-radius:10px; }
+
+/* CRUCE */
+#overlayImage{
+    position:absolute;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:1000;
+}
+#overlayImage img{
+    width:120px;
+    opacity:0.88;
+    border-radius:20px;
+}
+
+/* BUTOANE CATEGORII */
+#overlayButtons{
+    position:absolute;
+    top:150px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    z-index:1000;
+}
+#overlayButtons button{
+    padding:4px 10px;
+    font-size:11px;
+    font-weight:bold;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    opacity:0.4;
+}
+#overlayButtons button.active{
+    opacity:1;
+    box-shadow:0 0 10px rgba(255,215,140,0.8);
+}
+.btn-dragostea{background:#3498db;color:#fff;}
+.btn-nadejdea{background:#f1c40f;color:#000;}
+.btn-credinta{background:#e74c3c;color:#fff;}
 </style>
 </head>
+
 <body>
+<div id="overlayImage">
+    <img src="Sf Cruce.PNG" alt="Sf. Cruce" style="height:120px; width:auto;">
+</div>
+
+<div id="overlayImage">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAAEPCAYAAAAtcnqJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAP+lSURBVHhe7P1nmFxXdiWIJpDe+8zIzPDeex/pDRI24T1Bb0GQhCUJEARIgCBhCE" alt="Sf. Cruce">
+</div>
+
+<div id="overlayButtons">
+    <button class="btn-dragostea">DRAGOSTEA</button>
+    <button class="btn-nadejdea">NĂDEJDEA</button>
+    <button class="btn-credinta active">CREDINȚA</button>
+</div>
+
+<div class="widget" id="pomodoro">
+    <button onclick="startPomodoro()">Start</button>
+    <button onclick="pausePomodoro()">Pauză</button>
+    <button onclick="stopPomodoro()">Stop</button>
+    <div id="pomodoroTime">25:00</div>
+</div>
+
+<div class="widget" id="bells">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Clopotnita_Capusneni.jpg/1280px-Clopotnita_Capusneni.jpg" alt="Clopot">
+</div>
+
 <div class="overlay">
 <div class="card">
-<h1>☦️ Catehism Ortodox</h1>
-<div id="question">Se încarcă...</div>
-<div id="answer"></div>
-<div class="nav">
-<button onclick="prev()">◀ Anterioară</button>
-<button onclick="next()">Următoarea ▶</button>
+
+<div class="question" id="question"></div>
+<div class="answer" id="answer"></div>
+
+<div class="nav-text">
+    <span onclick="prevPage()">◀</span>
+    <span onclick="nextPage()">▶</span>
 </div>
-<div id="info"></div>
+
+<div class="page-indicator" id="pageIndicator"></div>
+
 </div>
 </div>
+
 <script>
-const API="https://script.google.com/macros/s/AKfycbxl7ksSYe3YZ_5ijkoDp94ugCEGNcRYZ0Tz69tNF3PCbbx7UCC4JsVlWhXYUDp472fy/exec";
-let data=[],i=0,shown=false;
+document.getElementById("bells").onclick=()=>{ window.open("https://youtu.be/Wir0jgo_rP0","_blank"); };
+
+const categories = [
+    {start:0,end:76,btn:".btn-credinta"},
+    {start:77,end:134,btn:".btn-nadejdea"},
+    {start:135,end:199,btn:".btn-dragostea"}
+];
+
+let catIndex=0, current=0;
 const q=document.getElementById("question");
 const a=document.getElementById("answer");
-const info=document.getElementById("info");
-async function loadData(){
- try{
-   const r=await fetch(API);
-   data=await r.json();
-   show();
- }catch(e){
-   q.textContent="Nu s-au putut încărca datele.";
- }
+const p=document.getElementById("pageIndicator");
+let answerVisible=false;
+let catehismData=[];
+
+function key(i){return "pagina_"+i;}
+function activateCategory(i){
+    catIndex=i;
+    const c=categories[i];
+    document.querySelectorAll("#overlayButtons button").forEach(b=>b.classList.remove("active"));
+    document.querySelector(c.btn).classList.add("active");
+    current=c.start;
+    load();
 }
-function show(){
- if(!data.length)return;
- q.textContent=data[i].q;
- a.textContent=data[i].a;
- a.style.display=shown?"block":"none";
- info.textContent=`Întrebarea ${i+1} din ${data.length}`;
+function load(){
+ const c=categories[catIndex];
+ if(!catehismData[current]) return;
+ q.innerText=catehismData[current].q;
+ a.innerText=catehismData[current].a;
+ answerVisible=true;
+ showAnswer();
+ p.innerText=`Pagina ${current-c.start+1} / ${c.end-c.start+1}`;
 }
-q.onclick=()=>{shown=!shown;show();}
-function next(){if(i<data.length-1){i++;shown=false;show();}}
-function prev(){if(i>0){i--;shown=false;show();}}
+function save(){}
+
+
+
+function nextPage(){ save(); if(current<categories[catIndex].end){current++;load();} else if(catIndex<2) activateCategory(catIndex+1);}
+function prevPage(){ save(); if(current>categories[catIndex].start){current--;load();} else if(catIndex>0){activateCategory(catIndex-1);current=categories[catIndex].end;load();}}
+
+function showAnswer(){a.style.display="block";a.style.opacity=1;a.style.maxHeight=a.scrollHeight+"px";answerVisible=true;}
+function hideAnswer(){a.style.maxHeight="0";a.style.opacity=0;setTimeout(()=>a.style.display="none",150);answerVisible=false;}
+q.onclick=()=>answerVisible?hideAnswer():showAnswer();
+
 document.addEventListener("keydown",e=>{
- if(e.key==="ArrowRight")next();
- if(e.key==="ArrowLeft")prev();
- if(e.key==="ArrowDown"){shown=true;show();}
- if(e.key==="ArrowUp"){shown=false;show();}
+    if(e.key==="ArrowRight") nextPage();
+    if(e.key==="ArrowLeft") prevPage();
+    if(e.key==="ArrowDown"&&!answerVisible) showAnswer();
+    if(e.key==="ArrowUp"&&answerVisible) hideAnswer();
 });
-loadData();
+
+let touchstartX=0,touchstartY=0,touchendX=0,touchendY=0;
+document.addEventListener('touchstart',e=>{
+    touchstartX=e.changedTouches[0].screenX;
+    touchstartY=e.changedTouches[0].screenY;
+});
+document.addEventListener('touchend',e=>{
+    touchendX=e.changedTouches[0].screenX;
+    touchendY=e.changedTouches[0].screenY;
+    if(touchendX+40<touchstartX) nextPage();
+    if(touchendX-40>touchstartX) prevPage();
+    if(touchendY-40>touchstartY) showAnswer();
+    if(touchendY+40<touchstartY) hideAnswer();
+});
+
+document.querySelector(".btn-credinta").onclick=()=>fetch("https://script.google.com/macros/s/AKfycbxl7ksSYe3YZ_5ijkoDp94ugCEGNcRYZ0Tz69tNF3PCbbx7UCC4JsVlWhXYUDp472fy/exec")
+.then(r=>r.json()).then(data=>{
+catehismData=data.map(x=>({q:x.q,a:x.a}));
+categories[2].end=catehismData.length-1;
+activateCategory(0);
+}).catch(e=>{q.innerText="Eroare API";a.innerText=String(e);});
+document.querySelector(".btn-nadejdea").onclick=()=>activateCategory(1);
+document.querySelector(".btn-dragostea").onclick=()=>activateCategory(2);
+
+fetch("https://script.google.com/macros/s/AKfycbxl7ksSYe3YZ_5ijkoDp94ugCEGNcRYZ0Tz69tNF3PCbbx7UCC4JsVlWhXYUDp472fy/exec")
+.then(r=>r.json()).then(data=>{
+catehismData=data.map(x=>({q:x.q,a:x.a}));
+categories[2].end=catehismData.length-1;
+activateCategory(0);
+}).catch(e=>{q.innerText="Eroare API";a.innerText=String(e);});
+
+let interval=null, time=1500, running=false, isWork=true;
+const timerDiv=document.getElementById("pomodoroTime");
+function updateTime(){timerDiv.innerText=String(Math.floor(time/60)).padStart(2,'0')+":"+String(time%60).padStart(2,'0');}
+function startPomodoro(){if(running) return; running=true; interval=setInterval(()=>{time--; updateTime(); if(time<=0){clearInterval(interval); if(isWork){isWork=false; time=300;} else {isWork=true; time=1500;} updateTime(); running=false; startPomodoro();}},1000);}
+function pausePomodoro(){if(running){running=false; clearInterval(interval);}}
+function stopPomodoro(){pausePomodoro(); isWork=true; time=1500; updateTime();}
+updateTime();
 </script>
+
 </body>
 </html>
