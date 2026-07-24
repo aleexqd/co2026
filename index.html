@@ -356,5 +356,11 @@ function stopPomodoro(){pausePomodoro(); isWork=true; time=1500; updateTime();}
 updateTime();
 </script>
 
+    <script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
 </body>
 </html>
