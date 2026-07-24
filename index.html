@@ -278,7 +278,7 @@ activateCategory(0);
 document.querySelector(".btn-nadejdea").onclick=()=>activateCategory(1);
 document.querySelector(".btn-dragostea").onclick=()=>activateCategory(2);
 
-fetch("https://script.google.com/macros/s/AKfycbxl7ksSYe3YZ_5ijkoDp94ugCEGNcRYZ0Tz69tNF3PCbbx7UCC4JsVlWhXYUDp472fy/exec")
+fetch("https://script.googleusercontent.com/macros/echo?user_content_key=test")
 .then(r=>r.json()).then(data=>{
 catehismData=data.map(x=>({q:x.q,a:x.a}));
 categories[2].end=catehismData.length-1;
