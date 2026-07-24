@@ -231,6 +231,9 @@ function activateCategory(i){
 function load(){
  const c=categories[catIndex];
  if(!catehismData[current]) return;
+console.log("INDEX:", current);
+console.log("INTREBARE:", catehismData[current].q);
+    
  q.innerText=catehismData[current].q;
  a.innerText=catehismData[current].a;
  answerVisible=true;
