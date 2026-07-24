@@ -207,9 +207,9 @@ html, body{
 document.getElementById("bells").onclick=()=>{ window.open("https://youtu.be/Wir0jgo_rP0","_blank"); };
 
 const categories = [
-    {start:0,end:76,btn:".btn-credinta"},
-    {start:77,end:134,btn:".btn-nadejdea"},
-    {start:148,end:212,btn:".btn-dragostea"}
+    {start:0,end:111,btn:".btn-credinta"},
+    {start:112,end:146,btn:".btn-nadejdea"},
+    {start:147,end:211,btn:".btn-dragostea"}
 ];
 
 let catIndex=0, current=0;
@@ -235,14 +235,46 @@ function load(){
  a.innerText=catehismData[current].a;
  answerVisible=true;
  showAnswer();
- p.innerText=`Pagina ${current-c.start+1} / ${c.end-c.start+1}`;
+ p.innerText=`${current+1} / ${catehismData.length}`;
 }
 function save(){}
 
 
 
-function nextPage(){ save(); if(current<categories[catIndex].end){current++;load();} else if(catIndex<2) activateCategory(catIndex+1);}
-function prevPage(){ save(); if(current>categories[catIndex].start){current--;load();} else if(catIndex>0){activateCategory(catIndex-1);current=categories[catIndex].end;load();}}
+function nextPage(){
+
+    save();
+
+    if(current < categories[catIndex].end){
+
+        current++;
+        load();
+
+    } else if(catIndex < categories.length-1){
+
+        activateCategory(catIndex+1);
+
+    }
+
+}
+function prevPage(){
+
+    save();
+
+    if(current > categories[catIndex].start){
+
+        current--;
+        load();
+
+    } else if(catIndex > 0){
+
+        activateCategory(catIndex-1);
+        current=categories[catIndex].end;
+        load();
+
+    }
+
+}
 
 function showAnswer(){a.style.display="block";a.style.opacity=1;a.style.maxHeight=a.scrollHeight+"px";answerVisible=true;}
 function hideAnswer(){a.style.maxHeight="0";a.style.opacity=0;setTimeout(()=>a.style.display="none",150);answerVisible=false;}
