@@ -60,12 +60,12 @@ html, body{
     border-radius:12px;
     background:rgba(255,215,140,0.06);
     max-height:0;
-    overflow:hidden;
+    overflow-y:auto;
+    overflow-x:hidden;
     display:none;
     opacity:0;
     transition:max-height 0.15s ease, opacity 0.15s ease;
 }
-
 /* NAV */
 .nav-text{
     margin-top:20px;
@@ -279,7 +279,22 @@ function prevPage(){
 
 }
 
-function showAnswer(){a.style.display="block";a.style.opacity=1;a.style.maxHeight=a.scrollHeight+"px";answerVisible=true;}
+function showAnswer(){
+
+    a.style.display="block";
+    a.style.opacity=1;
+
+    const max = window.innerHeight * 0.55;
+
+    if(a.scrollHeight > max){
+        a.style.maxHeight = max + "px";
+    }else{
+        a.style.maxHeight = a.scrollHeight + "px";
+    }
+
+    answerVisible=true;
+
+}
 function hideAnswer(){a.style.maxHeight="0";a.style.opacity=0;setTimeout(()=>a.style.display="none",150);answerVisible=false;}
 q.onclick=()=>answerVisible?hideAnswer():showAnswer();
 
