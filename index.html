@@ -347,17 +347,7 @@ document.addEventListener("keydown",e=>{
     if(e.key==="ArrowLeft") prevPage();
    });
 
-let touchstartX=0,touchstartY=0,touchendX=0,touchendY=0;
-document.addEventListener('touchstart',e=>{
-    touchstartX=e.changedTouches[0].screenX;
-    touchstartY=e.changedTouches[0].screenY;
-});
-document.addEventListener('touchend',e=>{
-    touchendX=e.changedTouches[0].screenX;
-    touchendY=e.changedTouches[0].screenY;
-    if(touchendX+40<touchstartX) nextPage();
-    if(touchendX-40>touchstartX) prevPage();
-    });
+
 
 fetch("catehism.json")
 .then(r=>r.json())
