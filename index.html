@@ -50,14 +50,18 @@ html, body{
     opacity:0.35;
 }
 .question{
-    background:red !important;
+    font-size:32px !important;
+    line-height:1.5 !important;
+    font-weight:600;
+    padding:18px;
+    border-radius:12px;
+    background:rgba(255,215,140,0.08);
+    cursor:pointer;
 }
 .answer{
     margin-top:12px;
-    font-size 18px;
-    line-height:1.8;
-    text-align:justify;
-    text-wrap:pretty;
+    font-size:30px !important;
+    line-height:1.7 !important;
     padding:18px;
     border-radius:12px;
     background:rgba(255,215,140,0.06);
@@ -66,7 +70,7 @@ html, body{
     overflow-x:hidden;
     display:none;
     opacity:0;
-    transition:max-height 0.15s ease, opacity 0.15s ease;
+    transition:max-height .15s ease, opacity .15s ease;
 }
 /* NAV */
 .nav-text{
