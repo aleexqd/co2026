@@ -213,15 +213,26 @@ html, body{
 <script>
 
     const audio = document.getElementById("bellsAudio");
+let bellsPlaying = false;
 
 document.getElementById("bells").onclick = () => {
 
-    if (audio.paused) {
+    if (!bellsPlaying) {
+
         audio.play();
+        bellsPlaying = true;
+
     } else {
+
         audio.pause();
+        bellsPlaying = false;
+
     }
 
+};
+
+audio.onended = () => {
+    bellsPlaying = false;
 };
 
 const categories = [
