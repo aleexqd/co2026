@@ -41,7 +41,11 @@ html, body{
     border-radius:18px;
     padding:20px;
     box-shadow:0 0 40px rgba(0,0,0,0.85);
-    margin-top:220px; 
+    margin-top:220px;
+    display:flex;
+flex-direction:column;
+height:calc(100vh - 260px);
+overflow:hidden;
 }
 .page-indicator{
     text-align:center;
@@ -60,24 +64,14 @@ html, body{
 }
 
     .answer{
-    margin-top:12px;
-    font-size:16px !important;
-    line-height:1.7 !important;
-    padding:18px;
-    padding-bottom:35px;
-    border-radius:12px;
-    background:rgba(255,215,140,0.06);
+flex:1;
+min-height:0;
+overflow-y:auto;
+overflow-x:hidden;
+padding-bottom:35px;
 
-    display:block;
-    opacity:1;
-
-    overflow-y:auto;
-    overflow-x:hidden;
-
-    box-sizing:border-box;
-
-    -webkit-overflow-scrolling:touch;
-    overscroll-behavior:contain;
+-webkit-overflow-scrolling:touch;
+overscroll-behavior:contain;
 }
     
 /* NAV */
@@ -337,13 +331,6 @@ function showAnswer(){
 
     a.style.display="block";
     a.style.opacity=1;
-
-    const max = window.innerHeight * 0.82;
-
-    if(a.scrollHeight > max){
-        a.style.maxHeight = max + "px";
-    }else{
-        a.style.maxHeight = a.scrollHeight + "px";
     }
 
     answerVisible=true;
