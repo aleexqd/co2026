@@ -215,11 +215,13 @@ document.getElementById("bells").onclick = () => {
 
     const audio = document.getElementById("bellsAudio");
 
-    audio.pause();
-    audio.currentTime = 0;
-    audio.loop = false;
+document.getElementById("bells").onclick = () => {
 
-    audio.play();
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
 
 };
 
