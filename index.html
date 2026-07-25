@@ -211,11 +211,13 @@ html, body{
 </div>
 
 <script>
-document.getElementById("bells").onclick=()=>{
+document.getElementById("bells").onclick = () => {
 
-    const audio=document.getElementById("bellsAudio");
+    const audio = document.getElementById("bellsAudio");
 
-    audio.currentTime=0;
+    audio.pause();
+    audio.currentTime = 0;
+    audio.loop = false;
 
     audio.play();
 
