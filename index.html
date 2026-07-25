@@ -56,6 +56,47 @@ html, body{
     flex-shrink:0;
 }
 
+#bookmark{
+    position:fixed;
+    right:12px;
+    bottom:80px;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:rgba(18,14,10,0.85);
+    border:1px solid #c9a24d;
+    color:#f2e6c9;
+    font-size:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:50;
+    opacity:0.75;
+}
+
+#bookmark:hover{
+    opacity:1;
+}
+
+
+#bookmarkMessage{
+    position:fixed;
+    bottom:120px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(18,14,10,0.95);
+    border:1px solid #c9a24d;
+    color:#f2e6c9;
+    padding:8px 15px;
+    border-radius:10px;
+    font-size:16px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.3s;
+    z-index:100;
+}
+    
     .question{
 font-size:18px !important;
 line-height:1.5 !important;
@@ -219,6 +260,9 @@ line-height:1.6;
     <source src="toacasiclopote.mp3" type="audio/mpeg">
 </audio>
 
+    <div id="bookmark" onclick="setBookmark()">🔖</div>
+<div id="bookmarkMessage"></div>
+    
 <div class="overlay">
 
 <div class="card">
@@ -295,7 +339,26 @@ console.log("INTREBARE:", catehismData[current].q);
  showAnswer();
  p.innerText=`${current+1} / 212`;
 }
-function save(){}
+
+    function save(){
+    localStorage.setItem("ultimaPagina", current);
+    localStorage.setItem("ultimaCategorie", catIndex);
+}
+
+
+function setBookmark(){
+
+    save();
+
+    const msg=document.getElementById("bookmarkMessage");
+
+    msg.innerText="🔖 Semn de carte salvat — Pagina " + (current+1);
+    msg.style.opacity=1;
+
+    setTimeout(()=>{
+        msg.style.opacity=0;
+    },2000);
+}
 
 
 
@@ -363,12 +426,33 @@ fetch("catehism.json")
 
     console.log(catehismData.length);
     console.log(catehismData[0]);
+    let savedPage = localStorage.getItem("ultimaPagina");
+let savedCat = localStorage.getItem("ultimaCategorie");
+
+if(savedPage !== null && savedCat !== null){
+
+    catIndex = Number(savedCat);
+    current = Number(savedPage);
+
+    document.querySelectorAll("#overlayButtons button")
+    .forEach(b=>b.classList.remove("active"));
+
+    document.querySelector(categories[catIndex].btn)
+    .classList.add("active");
+
+    load();
+
+}else{
+
     activateCategory(0);
+
+}
 
 })
 .catch(e=>{
     q.innerText="Eroare JSON";
     a.innerText=String(e);
+
 });
 
 
