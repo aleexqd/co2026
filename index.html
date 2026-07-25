@@ -186,10 +186,18 @@ html, body{
 </div>
 
 <div class="widget" id="bells">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Clopotnita_Capusneni.jpg/1280px-Clopotnita_Capusneni.jpg" alt="Clopot">
+    <img src="clopote.jpg" alt="Clopot">
+</div>
+    <div class="widget" id="bells">
+    <img src="clopot.png" alt="Clopot">
 </div>
 
+<audio id="bellsAudio" preload="auto">
+    <source src="clopote.mp3" type="audio/mpeg">
+</audio>
+
 <div class="overlay">
+
 <div class="card">
 
 <div class="question" id="question"></div>
@@ -206,7 +214,15 @@ html, body{
 </div>
 
 <script>
-document.getElementById("bells").onclick=()=>{ window.open("https://youtu.be/Wir0jgo_rP0","_blank"); };
+document.getElementById("bells").onclick=()=>{
+
+    const audio=document.getElementById("bellsAudio");
+
+    audio.currentTime=0;
+
+    audio.play();
+
+};
 
 const categories = [
     {start:0,end:111,btn:".btn-credinta"},
