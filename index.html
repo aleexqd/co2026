@@ -42,11 +42,7 @@ html, body{
     padding:20px;
     box-shadow:0 0 40px rgba(0,0,0,0.85);
     margin-top:220px;
-    display:flex;
-flex-direction:column;
-height:calc(100vh - 260px);
-overflow:hidden;
-}
+   }
 .page-indicator{
     text-align:center;
     margin-top:12px;
@@ -64,8 +60,6 @@ overflow:hidden;
 }
 
     .answer{
-flex:1;
-min-height:0;
 overflow-y:auto;
 overflow-x:hidden;
 padding-bottom:35px;
@@ -286,7 +280,12 @@ console.log("INTREBARE:", catehismData[current].q);
  a.innerText=catehismData[current].a;
  answerVisible=true;
  showAnswer();
- p.innerText=`${current+1} / 212`;
+const max = window.innerHeight * 0.82;
+
+if(a.scrollHeight > max){
+    a.style.maxHeight = max + "px";
+}else{
+    a.style.maxHeight = a.scrollHeight + "px";
 }
 function save(){}
 
