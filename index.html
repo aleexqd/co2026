@@ -15,8 +15,11 @@
     --bg-dark: rgba(12, 10, 8, 0.92);
     --card-bg: rgba(22, 18, 14, 0.95);
     --border-gold: rgba(212, 175, 55, 0.4);
-    --red-accent: #8b0000;
-    --blue-accent: #1b365d;
+    
+    /* CULORI REGALE PENTRU BUTOANE */
+    --red-royal: #8b0000;
+    --gold-royal: #c59b27;
+    --blue-royal: #1b365d;
 }
 
 * {
@@ -125,7 +128,7 @@ html, body {
 .search-box {
     width: 100%;
     max-width: 600px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 .search-box form {
     display: flex;
@@ -148,71 +151,6 @@ html, body {
     box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
 }
 
-/* MIND MAP / ARBORE DE NAVIGARE */
-.mindmap-container {
-    width: 100%;
-    max-width: 1100px;
-    margin-bottom: 25px;
-}
-.main-branches {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-}
-.branch-btn {
-    padding: 10px 22px;
-    font-size: 18px;
-    font-weight: 600;
-    font-family: 'Cormorant Garamond', serif;
-    border: 1px solid var(--border-gold);
-    border-radius: 25px;
-    background: var(--card-bg);
-    color: #e0d0b0;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.branch-btn:hover {
-    border-color: var(--gold);
-    color: var(--gold-light);
-    transform: translateY(-2px);
-}
-.branch-btn.active {
-    background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(139,0,0,0.3));
-    border-color: var(--gold);
-    color: #fff;
-    box-shadow: 0 0 15px rgba(212,175,55,0.4);
-}
-
-.sub-branches {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-}
-.sub-branches.open {
-    max-height: 250px;
-}
-.sub-btn {
-    padding: 5px 12px;
-    font-size: 14px;
-    border-radius: 15px;
-    border: 1px solid rgba(212,175,55,0.25);
-    background: rgba(15,12,9,0.8);
-    color: #c0b090;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-.sub-btn:hover, .sub-btn.active {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: rgba(212,175,55,0.15);
-}
-
 /* MODULE VIZUALE INTERACTIVE */
 .interactive-section {
     width: 100%;
@@ -220,10 +158,12 @@ html, body {
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    gap: 25px;
 }
 
 .section-box {
+    width: 100%;
     background: var(--card-bg);
     border: 1px solid var(--border-gold);
     border-radius: 15px;
@@ -240,34 +180,49 @@ html, body {
     letter-spacing: 1px;
 }
 
-/* DIAGRAMA SFINTEI TREIMI - 3 CERCELE/BUTOANE */
-.scutum-fidei {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25px;
-    flex-wrap: wrap;
-}
-.node {
-    width: 110px;
-    height: 110px;
+/* CHENAR CERC PENTRU SFÂNTA TREIME */
+.circle-box-trinity {
+    width: 320px;
+    height: 320px;
     border-radius: 50%;
-    border: 2px solid var(--gold);
-    background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, rgba(10,8,6,0.9) 100%);
+    background: var(--card-bg);
+    border: 2px solid var(--border-gold);
+    box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(212,175,55,0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.scutum-fidei {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+.node {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: radial-gradient(circle, rgba(212,175,55,0.25) 0%, rgba(10,8,6,0.95) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 15px;
     color: var(--gold-light);
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 .node:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 20px rgba(212,175,55,0.6);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(212,175,55,0.7);
 }
 
 /* TAINELE BISERICII */
@@ -322,6 +277,88 @@ html, body {
     font-weight: 700;
     color: var(--gold-light);
     font-size: 15px;
+}
+
+/* ARBORE CONCEPTUAL (MIND MAP) CU CULORI REGALE */
+.mindmap-container {
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 25px;
+}
+.main-branches {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.branch-btn {
+    padding: 12px 26px;
+    font-size: 19px;
+    font-weight: 700;
+    font-family: 'Cormorant Garamond', serif;
+    border-radius: 25px;
+    color: #ffffff !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.branch-credinta {
+    background: var(--red-royal);
+}
+.branch-nadejdea {
+    background: var(--gold-royal);
+}
+.branch-dragostea {
+    background: var(--blue-royal);
+}
+.branch-toate {
+    background: rgba(35, 28, 20, 0.9);
+    border: 1px solid var(--border-gold);
+    color: var(--gold-light) !important;
+}
+
+.branch-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.8);
+    filter: brightness(1.15);
+}
+
+.branch-btn.active {
+    box-shadow: 0 0 20px #ffffff, 0 0 10px var(--gold);
+    border-color: #ffffff;
+}
+
+.sub-branches {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+.sub-branches.open {
+    max-height: 250px;
+}
+.sub-btn {
+    padding: 6px 14px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 15px;
+    border: 1px solid rgba(212,175,55,0.3);
+    background: rgba(15,12,9,0.85);
+    color: #e0d0b0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.sub-btn:hover, .sub-btn.active {
+    border-color: var(--gold);
+    color: #ffffff;
+    background: rgba(212,175,55,0.25);
 }
 
 /* FLASHCARDS GRID */
@@ -433,6 +470,8 @@ html, body {
     .cards-grid { grid-template-columns: 1fr; }
     .flashcard { height: 260px; }
     .main-title { font-size: 26px; }
+    .circle-box-trinity { width: 280px; height: 280px; }
+    .node { width: 70px; height: 70px; font-size: 13px; }
 }
 </style>
 </head>
@@ -461,38 +500,17 @@ html, body {
         <h1 class="main-title">CATEHISM ORTODOX</h1>
     </div>
 
-    <!-- CĂUTARE LIVE -->
+    <!-- 1. CĂUTARE LIVE -->
     <div class="search-box">
         <form onsubmit="event.preventDefault(); filterCards();">
             <input type="text" id="searchInput" placeholder="🔍 Caută în întreaga învățătură..." onkeyup="filterCards()" onchange="filterCards()">
         </form>
     </div>
 
-    <!-- ARBORE CONCEPTUAL (MIND MAP) -->
-    <div class="mindmap-container">
-        <div class="main-branches">
-            <button class="branch-btn active" onclick="selectCategory(0)">I. CREDINȚA</button>
-            <button class="branch-btn" onclick="selectCategory(1)">II. NĂDEJDEA</button>
-            <button class="branch-btn" onclick="selectCategory(2)">III. DRAGOSTEA</button>
-            <button class="branch-btn" onclick="showAllCards()">Toate Întrebările</button>
-        </div>
-        <div class="sub-branches" id="subBranches"></div>
-    </div>
-
-    <!-- MODULE VIZUALE INTERACTIVE -->
+    <!-- MODULE VIZUALE INTERACTIVE (TAINELE + ISTORIA MÂNTUIRII + SFÂNTA TREIME) -->
     <div class="interactive-section">
         
-        <!-- SFÂNTA TREIME - DOAR CELE 3 BUTOANE/CERCELE -->
-        <div class="section-box">
-            <div class="section-title">☦️ Sfânta Treime</div>
-            <div class="scutum-fidei">
-                <div class="node" onclick="filterByExactRange(11, 14)">TATĂL<br><small>Atotțiitorul</small></div>
-                <div class="node" onclick="filterByExactRange(24, 34)">FIUL<br><small>Mântuitorul</small></div>
-                <div class="node" onclick="filterByExactRange(56, 60)">DUHUL SFÂNT<br><small>Făcătorul de viață</small></div>
-            </div>
-        </div>
-
-        <!-- TAINELE BISERICII - FILTRARE EXACTĂ DUPĂ ID -->
+        <!-- TAINELE BISERICII -->
         <div class="section-box">
             <div class="section-title">🕊️ Sfintele Taine</div>
             <div class="tainele-grid">
@@ -506,7 +524,7 @@ html, body {
             </div>
         </div>
 
-        <!-- LINIA TIMPULUI - FILTRARE EXACTĂ DUPĂ ID -->
+        <!-- LINIA TIMPULUI -->
         <div class="section-box">
             <div class="section-title">📜 Istoria Mântuirii</div>
             <div class="timeline-scroll">
@@ -537,6 +555,27 @@ html, body {
             </div>
         </div>
 
+        <!-- 2. SFÂNTA TREIME - INCADRATĂ ÎNTR-UN CERC-CHENAR MARE -->
+        <div class="circle-box-trinity">
+            <div class="section-title" style="margin-bottom:5px;">☦️ Sfânta Treime</div>
+            <div class="scutum-fidei">
+                <div class="node" onclick="filterByExactRange(11, 14)">TATĂL</div>
+                <div class="node" onclick="filterByExactRange(24, 34)">FIUL</div>
+                <div class="node" onclick="filterByExactRange(56, 60)">DUHUL SFÂNT</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3. ARBORE CONCEPTUAL (MIND MAP) CU BUTOANE REGALE -->
+    <div class="mindmap-container">
+        <div class="main-branches">
+            <button class="branch-btn branch-credinta active" onclick="selectCategory(0)">I. CREDINȚA</button>
+            <button class="branch-btn branch-nadejdea" onclick="selectCategory(1)">II. NĂDEJDEA</button>
+            <button class="branch-btn branch-dragostea" onclick="selectCategory(2)">III. DRAGOSTEA</button>
+            <button class="branch-btn branch-toate" onclick="showAllCards()">Toate Întrebările</button>
+        </div>
+        <div class="sub-branches" id="subBranches"></div>
     </div>
 
     <!-- GRILĂ FLASHCARDS -->
