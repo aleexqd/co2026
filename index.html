@@ -2,872 +2,469 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
-<title>☦️ CATEHISM ORTODOX INTERACTIV</title>
+<title>☦️CATEHISM ORTODOX</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#080808">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-:root {
-    --gold: #d4af37;
-    --gold-light: #f3e5ab;
-    --bg-dark: rgba(12, 10, 8, 0.92);
-    --card-bg: rgba(22, 18, 14, 0.95);
-    --border-gold: rgba(212, 175, 55, 0.4);
+    *{
+    box-sizing:border-box;
+}
+html, body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    font-family:'Cormorant Garamond',serif;
+    background-image:url("PEISAJ.jpg");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:#f2e6c9;
+    height:100%;
+}
+.overlay{
+    min-height:100vh;
+    background:rgba(8,8,8,0.84);
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:20px;
+    position: relative;
+    z-index: 10;
+}
+    .card{
+    max-width:900px;
+    width:100%;
+    background:rgba(18,14,10,0.92);
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 0 40px rgba(0,0,0,0.85);
+    margin-top:170px;
+
+    display:flex;
+    flex-direction:column;
+
+    height:calc(100vh - 190px);
+}
+.page-indicator{
+    text-align:center;
+    margin-top:12px;
+    font-size:18px;
+    opacity:0.35;
+    flex-shrink:0;
+}
+
+#bookmark{
+    position:fixed;
+    right:12px;
+    bottom:80px;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:rgba(18,14,10,0.85);
+    border:1px solid #c9a24d;
+    color:#f2e6c9;
+    font-size:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:50;
+    opacity:0.75;
+}
+
+#bookmark:hover{
+    opacity:1;
+}
+
+
+#bookmarkMessage{
+    position:fixed;
+    bottom:120px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(18,14,10,0.95);
+    border:1px solid #c9a24d;
+    color:#f2e6c9;
+    padding:8px 15px;
+    border-radius:10px;
+    font-size:16px;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.3s;
+    z-index:100;
+}
     
-    /* CULORI REGALE PENTRU BUTOANE */
-    --red-royal: #8b0000;
-    --gold-royal: #c59b27;
-    --blue-royal: #1b365d;
+    .question{
+font-size:18px !important;
+line-height:1.5 !important;
+font-weight:600;
+padding:18px;
+border-radius:12px;
+background:rgba(255,215,140,0.08);
+
+max-height:35%;
+overflow-y:auto;
+flex-shrink:0;
 }
 
-* {
-    box-sizing: border-box;
+    .answer{
+flex:1;
+overflow-y:auto;
+overflow-x:hidden;
+padding-top:15px;
+padding-bottom:25px;
+font-size:20px;
+line-height:1.6;
+}
+    
+/* NAV */
+.nav-text{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+    font-size:24px;
+    opacity:0.55;
+    user-select:none;
+    flex-shrink:0;
+}
+.nav-text span{ cursor:pointer; }
+.nav-text span:hover{ opacity:0.9; }
+
+/* WIDGETE */
+.widget{
+    position:fixed;
+    background:rgba(18,14,10,0.95);
+    border:1px solid #c9a24d;
+    border-radius:12px;
+    padding:8px;
+    font-size:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.7);
+}
+#pomodoro{ top:10px; left:10px; display:flex; align-items:center; gap:5px; z-index:20; }
+#pomodoroTime{ font-size:20px; font-weight:bold; min-width:50px; text-align:center; color:#f5deb3; }
+#pomodoro button{
+    padding:3px 6px;
+    font-size:11px;
+    border-radius:6px;
+    border:1px solid #b89b55;
+    background:linear-gradient(180deg,#4a3820,#2e2314);
+    color:#f2e6c9;
+    cursor:pointer;
+}
+#pomodoro button:hover{
+    background:linear-gradient(180deg,#5a4528,#3a2c18);
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Cormorant Garamond', serif;
-    background-image: url("PEISAJ.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: #f2e6c9;
-    min-height: 100vh;
+/* CLOPOTE */
+#bells{
+    top:10px;
+    right:10px;
+    width:50px;
+    height:50px;
+    padding:0;
+    cursor:pointer;
+    border-radius:10px;
+    border:1px solid #c9a24d;
+    z-index:20;
+}
+#bells img{ width:100%; height:100%; border-radius:10px; }
+
+/* CRUCE */
+#overlayImage{
+    position:absolute;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:1000;
+}
+#overlayImage img{
+    width:120px;
+    opacity:0.88;
+    border-radius:20px;
 }
 
-/* BARĂ DE PROGRES & HEADER FIX */
-#progress-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 2000;
+/* BUTOANE CATEGORII */
+#overlayButtons{
+    position:absolute;
+    top:150px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    z-index:1000;
 }
+#overlayButtons button{
+    padding:4px 10px;
+    font-size:11px;
+    font-weight:bold;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    opacity:0.4;
+}
+#overlayButtons button.active{
+    opacity:1;
+    box-shadow:0 0 10px rgba(255,215,140,0.8);
+}
+.btn-dragostea{background:#3498db;color:#fff;}
+.btn-nadejdea{background:#f1c40f;color:#000;}
+.btn-credinta{background:#e74c3c;color:#fff;}
+    @media (max-width:768px){
 
-#progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #b8860b, var(--gold), #fff8dc);
-    box-shadow: 0 0 10px var(--gold);
-    transition: width 0.3s ease;
-}
-
-.top-bar {
-    position: fixed;
-    top: 5px;
-    right: 15px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    z-index: 1000;
-}
-
-#bells {
-    width: 42px;
-    height: 42px;
-    cursor: pointer;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    box-shadow: 0 0 10px rgba(0,0,0,0.8);
-    transition: transform 0.2s;
-}
-#bells:hover { transform: scale(1.1); }
-#bells img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-
-#bookmark {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--card-bg);
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.8);
-    transition: transform 0.2s;
-}
-#bookmark:hover { transform: scale(1.1); }
-
-.overlay {
-    min-height: 100vh;
-    background: radial-gradient(circle, rgba(16,12,8,0.82) 0%, rgba(5,4,3,0.95) 100%);
-    padding: 15px 15px 60px 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-/* HEADER & CRUCE */
-.header-section {
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-.header-section img {
-    height: 85px;
-    width: auto;
-    filter: drop-shadow(0 0 12px rgba(212,175,55,0.6));
-}
-.main-title {
-    font-size: 32px;
-    letter-spacing: 2px;
-    color: var(--gold-light);
-    margin: 8px 0 5px 0;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-}
-
-/* CĂUTARE LIVE */
-.search-box {
-    width: 100%;
-    max-width: 600px;
-    margin-bottom: 20px;
-}
-.search-box form {
-    display: flex;
-    width: 100%;
-}
-.search-box input {
-    width: 100%;
-    padding: 12px 20px;
-    border-radius: 25px;
-    border: 1px solid var(--border-gold);
-    background: rgba(10, 8, 6, 0.9);
-    color: var(--gold-light);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    outline: none;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
-}
-.search-box input:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
-}
-
-/* LAYOUT PRINCIPAL */
-.main-layout {
-    display: flex;
-    gap: 25px;
-    width: 100%;
-    max-width: 1200px;
-    align-items: flex-start;
-}
-
-/* SECȚIUNEA LATERALĂ STÂNGA: ISTORIA MÂNTUIRII */
-.left-sidebar {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    width: 210px;
-    z-index: 100;
-}
-
-.timeline-vertical-box {
-    background: var(--card-bg);
-    border: 1px solid var(--border-gold);
-    border-radius: 15px;
-    padding: 15px 10px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-}
-
-.timeline-vertical-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-.timeline-vertical-list::-webkit-scrollbar {
-    display: none;
-}
-
-.time-step-v {
-    width: 100%;
-    padding: 8px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border-gold);
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-.time-step-v:hover {
-    border-color: var(--gold);
-    background: rgba(212,175,55,0.2);
-    transform: translateX(3px);
-}
-.time-step-v .step-title {
-    font-weight: 700;
-    color: var(--gold-light);
-    font-size: 14px;
-}
-
-/* CONTAINERUL CENTRAL */
-.center-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-    width: 100%;
-    margin-left: 230px;
-}
-
-/* CHENAR CERC PENTRU SFÂNTA TREIME (CU EFECT DE APRINDERE / STRĂLUCIRE) */
-.circle-box-trinity {
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: var(--card-bg);
-    border: 2px solid var(--border-gold);
-    box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(212,175,55,0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    margin: 0 auto;
-    transition: all 0.5s ease-in-out;
-}
-
-.circle-box-trinity:hover {
-    border-color: #fff8dc;
-    box-shadow: 0 0 50px rgba(212, 175, 55, 0.8), inset 0 0 35px rgba(212, 175, 55, 0.4);
-    transform: scale(1.02);
-}
-
-.circle-box-trinity:hover .section-title {
-    color: #ffffff;
-    text-shadow: 0 0 15px var(--gold-light);
-}
-
-.scutum-fidei {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 5px;
-}
-
-.node {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 2px solid var(--gold);
-    background: radial-gradient(circle, rgba(212,175,55,0.25) 0%, rgba(10,8,6,0.95) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--gold-light);
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-.circle-box-trinity:hover .node {
-    border-color: #ffffff;
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-}
-
-.node:hover {
-    transform: scale(1.15) !important;
-    box-shadow: 0 0 25px rgba(255, 223, 110, 0.9) !important;
-    background: radial-gradient(circle, rgba(212,175,55,0.5) 0%, rgba(20,15,10,0.95) 100%);
-}
-
-.section-box {
-    width: 100%;
-    background: var(--card-bg);
-    border: 1px solid var(--border-gold);
-    border-radius: 15px;
-    padding: 18px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-}
-.section-title {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--gold);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-}
-
-/* ARBORE CONCEPTUAL (MIND MAP) CU BUTOANE REGALE */
-.mindmap-container {
-    width: 100%;
-}
-.main-branches {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-}
-
-.branch-btn {
-    padding: 12px 26px;
-    font-size: 19px;
-    font-weight: 700;
-    font-family: 'Cormorant Garamond', serif;
-    border-radius: 25px;
-    color: #ffffff !important;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.3);
-}
-
-.branch-credinta {
-    background: var(--red-royal);
-}
-.branch-nadejdea {
-    background: var(--gold-royal);
-}
-.branch-dragostea {
-    background: var(--blue-royal);
-}
-.branch-toate {
-    background: rgba(35, 28, 20, 0.9);
-    border: 1px solid var(--border-gold);
-    color: var(--gold-light) !important;
-}
-
-.branch-btn:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.8);
-    filter: brightness(1.15);
-}
-
-.branch-btn.active {
-    box-shadow: 0 0 20px #ffffff, 0 0 10px var(--gold);
-    border-color: #ffffff;
-}
-
-.sub-branches {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-}
-.sub-branches.open {
-    max-height: 250px;
-}
-.sub-btn {
-    padding: 6px 14px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 15px;
-    border: 1px solid rgba(212,175,55,0.3);
-    background: rgba(15,12,9,0.85);
-    color: #e0d0b0;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-.sub-btn:hover, .sub-btn.active {
-    border-color: var(--gold);
-    color: #ffffff;
-    background: rgba(212,175,55,0.25);
-}
-
-/* FLASHCARDS GRID */
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    width: 100%;
-    scroll-margin-top: 30px;
-}
-
-.flashcard {
-    height: 280px;
-    perspective: 1000px;
-    cursor: pointer;
-}
-
-.flashcard-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform-style: preserve-3d;
-}
-
-.flashcard.flipped .flashcard-inner {
-    transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 16px;
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid var(--border-gold);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
-}
-
-.card-front {
-    background: var(--card-bg);
-    color: #f2e6c9;
-}
-
-.card-back {
-    background: rgba(8, 6, 4, 0.98);
-    border-color: var(--gold);
-    color: #f5deb3;
-    transform: rotateY(180deg);
-    overflow-y: auto;
-}
-
-.card-badge {
-    align-self: flex-start;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 3px 10px;
-    border-radius: 12px;
-    background: rgba(212,175,55,0.15);
-    color: var(--gold);
-    border: 1px solid rgba(212,175,55,0.3);
-}
-
-.card-question {
-    font-size: 19px;
-    font-weight: 700;
-    line-height: 1.4;
-    color: var(--gold-light);
-    margin: auto 0;
-}
-
-.card-hint {
-    font-size: 12px;
-    opacity: 0.6;
-    text-align: center;
-    font-style: italic;
-    color: var(--gold);
-}
-
-.card-answer {
-    font-size: 17px;
-    line-height: 1.55;
-    white-space: pre-line;
-}
-
-#bookmarkMessage {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--card-bg);
-    border: 1px solid var(--gold);
-    color: var(--gold-light);
-    padding: 10px 22px;
-    border-radius: 20px;
-    font-size: 16px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-    z-index: 2000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.8);
-}
-
-@media (max-width: 1100px) {
-    .left-sidebar {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        margin-bottom: 20px;
+    .question{
+        font-size:24px;
+        line-height:1.4;
+        flex-shrink:0;
     }
-    .center-content {
-        margin-left: 0;
-    }
-    .main-layout {
-        flex-direction: column;
-        align-items: center;
-    }
-    .timeline-vertical-list {
-        flex-direction: row;
-        overflow-x: auto;
-    }
-    .time-step-v {
-        min-width: 130px;
-    }
-}
 
-@media (max-width: 768px) {
-    .cards-grid { grid-template-columns: 1fr; }
-    .flashcard { height: 260px; }
-    .main-title { font-size: 26px; }
-    .circle-box-trinity { width: 280px; height: 280px; }
-    .node { width: 70px; height: 70px; font-size: 13px; }
+    .answer{
+        font-size:24px;
+        line-height:1.55;
+    }
+
 }
 </style>
 </head>
+
 <body>
-
-<!-- BARĂ DE PROGRES -->
-<div id="progress-container"><div id="progress-bar"></div></div>
-
-<div class="top-bar">
-    <div id="bells" title="Toacă și clopote">
-        <img src="clopote.jpg" alt="Clopot">
-    </div>
-    <div id="bookmark" onclick="saveBookmark()" title="Salvează progresul">🔖</div>
+<div id="overlayImage">
+    <img src="Sf Cruce.PNG" alt="Sf. Cruce" style="height:120px; width:auto;">
 </div>
 
+<div id="overlayImage">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAAEPCAYAAAAtcnqJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAP+lSURBVHhe7P1nmFxXdiWIJpDe+8zIzPDeex/pDRI24T1Bb0GQhCUJEARIgCBhCE" alt="Sf. Cruce">
+</div>
+
+<div id="overlayButtons">
+    <button class="btn-dragostea">DRAGOSTEA</button>
+    <button class="btn-nadejdea">NĂDEJDEA</button>
+    <button class="btn-credinta active">CREDINȚA</button>
+</div>
+
+
+
+<div class="widget" id="bells">
+    <img src="clopote.jpg" alt="Clopot">
+</div>
+    
 <audio id="bellsAudio" preload="auto">
     <source src="toacasiclopote.mp3" type="audio/mpeg">
 </audio>
 
+    <div id="bookmark" onclick="setBookmark()">🔖</div>
 <div id="bookmarkMessage"></div>
-
+    
 <div class="overlay">
 
-    <!-- SECȚIUNEA LATERALĂ STÂNGA: ISTORIA MÂNTUIRII -->
-    <div class="left-sidebar">
-        <div class="timeline-vertical-box">
-            <div class="section-title" style="font-size: 16px; margin-bottom: 12px;">📜 Istoria Mântuirii</div>
-            <div class="timeline-vertical-list">
-                <div class="time-step-v" onclick="filterByExactRange(16, 17, null, true)">
-                    <div class="step-title">1. Facerea</div>
-                </div>
-                <div class="time-step-v" onclick="filterByExactRange(19, 20, null, true)">
-                    <div class="step-title">2. Adam și Eva</div>
-                </div>
-                <div class="time-step-v" onclick="filterByExactRange(21, 21, null, true)">
-                    <div class="step-title">3. Căderea</div>
-                </div>
-                <div class="time-step-v" onclick="filterByExactRange(35, 36, null, true)">
-                    <div class="step-title">4. Nașterea</div>
-                </div>
-                <div class="time-step-v" onclick="filterByExactRange(38, 41, null, true)">
-                    <div class="step-title">5. Răstignirea</div>
-                </div>
-                <div class="time-step-v" onclick="filterByExactRange(42, 44, null, true)">
-                    <div class="step-title">6. Învierea</div>
-                </div>
-                <div class="time-step-v" onclick="filterByExactRange(45, 47, null, true)">
-                    <div class="step-title">7. Înălțarea</div>
-                </div>
-                <div class="time-step-v" onclick="filterByExactRange(48, 55, null, true)">
-                    <div class="step-title">8. Judecata</div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="card">
 
-    <div class="header-section">
-        <img src="Sf Cruce.PNG" alt="Sfânta Cruce">
-        <h1 class="main-title">CATEHISM ORTODOX</h1>
-    </div>
+<div class="question" id="question"></div>
+<div class="answer" id="answer"></div>
 
-    <!-- SFÂNTA TREIME (POZIȚIONATĂ DEASUPRA BAREI DE CĂUTARE) -->
-    <div class="circle-box-trinity" style="margin-bottom: 25px;">
-        <div class="section-title" style="margin-bottom:5px;">☦️ Sfânta Treime</div>
-        <div class="scutum-fidei">
-            <div class="node" onclick="filterByExactRange(11, 14, null, true)">TATĂL</div>
-            <div class="node" onclick="filterByExactRange(24, 34, null, true)">FIUL</div>
-            <div class="node" onclick="filterByExactRange(56, 60, null, true)">DUHUL SFÂNT</div>
-        </div>
-    </div>
+<div class="nav-text">
+    <span onclick="prevPage()">◀</span>
+    <span onclick="nextPage()">▶</span>
+</div>
 
-    <!-- CĂUTARE LIVE (POZIȚIONATĂ SUB SFÂNTA TREIME) -->
-    <div class="search-box">
-        <form onsubmit="event.preventDefault(); filterCards();">
-            <input type="text" id="searchInput" placeholder="🔍 Caută în întreaga învățătură..." onkeyup="filterCards()" onchange="filterCards()">
-        </form>
-    </div>
+<div class="page-indicator" id="pageIndicator"></div>
 
-    <!-- LAYOUT PRINCIPAL -->
-    <div class="main-layout">
-
-        <!-- CONTAINERUL CENTRAL -->
-        <div class="center-content">
-            
-            <!-- ARBORE CONCEPTUAL (MIND MAP) -->
-            <div class="mindmap-container">
-                <div class="main-branches">
-                    <button class="branch-btn branch-credinta active" onclick="selectCategory(0, true)">I. CREDINȚA</button>
-                    <button class="branch-btn branch-nadejdea" onclick="selectCategory(1, true)">II. NĂDEJDEA</button>
-                    <button class="branch-btn branch-dragostea" onclick="selectCategory(2, true)">III. DRAGOSTEA</button>
-                    <button class="branch-btn branch-toate" onclick="showAllCards(true)">Toate Întrebările</button>
-                </div>
-                <div class="sub-branches" id="subBranches"></div>
-            </div>
-
-            <!-- GRILĂ FLASHCARDS -->
-            <div class="cards-grid" id="cardsGrid"></div>
-
-        </div>
-
-    </div>
-
+</div>
 </div>
 
 <script>
-/* CLOPOTE AUDIO */
-const audio = document.getElementById("bellsAudio");
+
+    const audio = document.getElementById("bellsAudio");
 let bellsPlaying = false;
+
 document.getElementById("bells").onclick = () => {
+
     if (!bellsPlaying) {
+
         audio.play();
         bellsPlaying = true;
+
     } else {
+
         audio.pause();
         bellsPlaying = false;
-    }
-};
-audio.onended = () => { bellsPlaying = false; };
 
-/* STRUCTURĂ STRICTĂ A CATEGORIILOR ȘI SUB-TEMELOR (ID 1 - 212) */
-const categoryStructure = [
-    {
-        name: "I. CREDINȚA",
-        startId: 1,
-        endId: 112,
-        subs: [
-            { name: "Omul & Scopul vieții", startId: 1, endId: 2 },
-            { name: "Cele 3 Virtuți Teologice", startId: 3, endId: 10 },
-            { name: "Dumnezeu Tatăl", startId: 11, endId: 14 },
-            { name: "Sfânta Treime", startId: 15, endId: 15 },
-            { name: "Facerea Lumii", startId: 16, endId: 17 },
-            { name: "Îngerii", startId: 18, endId: 18 },
-            { name: "Adam și Eva", startId: 19, endId: 20 },
-            { name: "Căderea în Păcat", startId: 21, endId: 21 },
-            { name: "Așteptarea lui Mesia", startId: 22, endId: 23 },
-            { name: "Iisus Hristos", startId: 24, endId: 34 },
-            { name: "Nașterea Domnului", startId: 35, endId: 36 },
-            { name: "Maica Domnului", startId: 37, endId: 37 },
-            { name: "Răstignirea Domnului", startId: 38, endId: 41 },
-            { name: "Învierea Domnului", startId: 42, endId: 44 },
-            { name: "Înălțarea Domnului", startId: 45, endId: 47 },
-            { name: "Judecata de Apoi", startId: 48, endId: 55 },
-            { name: "Duhul Sfânt", startId: 56, endId: 60 },
-            { name: "Biserica", startId: 61, endId: 67 },
-            { name: "Sfintele Taine", startId: 68, endId: 73 },
-            { name: "Sfântul Botez", startId: 74, endId: 78 },
-            { name: "Sfânta Mirungere", startId: 79, endId: 81 },
-            { name: "Sfânta Pocăință", startId: 82, endId: 85 },
-            { name: "Sfânta Împărtășanie", startId: 86, endId: 90 },
-            { name: "Sfânta Cununie", startId: 91, endId: 94 },
-            { name: "Hirotonia", startId: 95, endId: 97 },
-            { name: "Sfântul Maslu", startId: 98, endId: 100 },
-            { name: "Învierea Morților", startId: 101, endId: 108 },
-            { name: "Viața Veșnică", startId: 109, endId: 112 }
-        ]
-    },
-    {
-        name: "II. NĂDEJDEA",
-        startId: 113,
-        endId: 147,
-        subs: [
-            { name: "Rugăciunea", startId: 113, endId: 119 },
-            { name: "Tatăl Nostru", startId: 120, endId: 124 },
-            { name: "Cererile din Tatăl Nostru", startId: 125, endId: 136 },
-            { name: "Fericirile", startId: 137, endId: 147 }
-        ]
-    },
-    {
-        name: "III. DRAGOSTEA",
-        startId: 148,
-        endId: 212,
-        subs: [
-            { name: "Iubirea Aproapelui", startId: 148, endId: 152 },
-            { name: "Cele 10 Porunci", startId: 153, endId: 190 },
-            { name: "Viața Creștină", startId: 191, endId: 195 },
-            { name: "Păcatul & Virtuțile", startId: 196, endId: 212 }
-        ]
     }
+
+};
+
+audio.onended = () => {
+    bellsPlaying = false;
+};
+
+const categories = [
+    {start:0,end:111,btn:".btn-credinta"},
+    {start:112,end:146,btn:".btn-nadejdea"},
+    {start:147,end:211,btn:".btn-dragostea"}
 ];
 
-let allData = [];
-let flippedSet = new Set();
-let activeCatIndex = 0;
+let catIndex=0, current=0;
+const q=document.getElementById("question");
+const a=document.getElementById("answer");
+const p=document.getElementById("pageIndicator");
+let answerVisible=false;
+let catehismData=[];
 
-/* ÎNCĂRCARE DATE JSON */
+function key(i){return "pagina_"+i;}
+function activateCategory(i){
+    catIndex=i;
+    const c=categories[i];
+    document.querySelectorAll("#overlayButtons button").forEach(b=>b.classList.remove("active"));
+    document.querySelector(c.btn).classList.add("active");
+    current=c.start;
+    load();
+}
+function load(){
+ const c=categories[catIndex];
+ if(!catehismData[current]) return;
+console.log("INDEX:", current);
+console.log("INTREBARE:", catehismData[current].q);
+    
+ q.innerText=catehismData[current].q;
+ a.innerText=catehismData[current].a;
+ answerVisible=true;
+ showAnswer();
+ p.innerText=`${current+1} / 212`;
+}
+
+    function save(){
+    localStorage.setItem("ultimaPagina", current);
+    localStorage.setItem("ultimaCategorie", catIndex);
+}
+
+
+function setBookmark(){
+
+    save();
+
+    const msg=document.getElementById("bookmarkMessage");
+
+    msg.innerText="🔖 Semn de carte salvat — Pagina " + (current+1);
+    msg.style.opacity=1;
+
+    setTimeout(()=>{
+        msg.style.opacity=0;
+    },2000);
+}
+
+
+
+function nextPage(){
+
+    save();
+
+    if(current < categories[catIndex].end){
+
+        current++;
+        load();
+
+    } else if(catIndex < categories.length-1){
+
+        activateCategory(catIndex+1);
+
+    }
+
+}
+function prevPage(){
+
+    save();
+
+    if(current > categories[catIndex].start){
+
+        current--;
+        load();
+
+    } else if(catIndex > 0){
+
+        activateCategory(catIndex-1);
+        current=categories[catIndex].end;
+        load();
+
+    }
+
+}
+
+function showAnswer(){
+
+    a.style.display="block";
+    a.style.opacity=1;
+    a.scrollTop=0;
+    answerVisible=true;
+}
+
+
+document.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight") nextPage();
+    if(e.key==="ArrowLeft") prevPage();
+   });
+
+
+
 fetch("catehism.json")
-.then(r => r.json())
-.then(data => {
-    allData = data;
-    renderSubBranches(0);
-    selectCategory(0, false);
-    loadBookmark();
+.then(r=>r.json())
+.then(data=>{
+
+    catehismData=data.map(x=>({
+        q:x.q,
+        a:x.a
+    }));
+
+    categories[2].end=211;
+
+    console.log(catehismData.length);
+    console.log(catehismData[0]);
+    let savedPage = localStorage.getItem("ultimaPagina");
+let savedCat = localStorage.getItem("ultimaCategorie");
+
+if(savedPage !== null && savedCat !== null){
+
+    catIndex = Number(savedCat);
+    current = Number(savedPage);
+
+    document.querySelectorAll("#overlayButtons button")
+    .forEach(b=>b.classList.remove("active"));
+
+    document.querySelector(categories[catIndex].btn)
+    .classList.add("active");
+
+    load();
+
+}else{
+
+    activateCategory(0);
+
+}
+
+})
+.catch(e=>{
+    q.innerText="Eroare JSON";
+    a.innerText=String(e);
+
 });
 
-/* FUNCȚIE AUTOSCROLL CĂTRE ZONA CU FLASHCARDS */
-function scrollToCards() {
-    const grid = document.getElementById("cardsGrid");
-    if (grid) {
-        grid.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-}
 
-/* RANDARE CARDS */
-function renderCards(dataList, autoScroll = false) {
-    const grid = document.getElementById("cardsGrid");
-    grid.innerHTML = "";
+document.querySelector(".btn-credinta").onclick=()=>activateCategory(0);
+document.querySelector(".btn-nadejdea").onclick=()=>activateCategory(1);
+document.querySelector(".btn-dragostea").onclick=()=>activateCategory(2);
 
-    if (dataList.length === 0) {
-        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--gold); font-size:20px;">Nu s-a găsit nicio întrebare.</div>`;
-        return;
-    }
-
-    dataList.forEach(item => {
-        const id = item.id;
-        const isFlipped = flippedSet.has(id) ? "flipped" : "";
-
-        const cardHTML = `
-            <div class="flashcard ${isFlipped}" id="card-${id}" onclick="flipCard(${id})">
-                <div class="flashcard-inner">
-                    <div class="card-front">
-                        <div class="card-badge">Întrebarea ${id}</div>
-                        <div class="card-question">${item.q}</div>
-                        <div class="card-hint">💡 Apasă pentru a citi răspunsul</div>
-                    </div>
-                    <div class="card-back">
-                        <div class="card-badge">Răspuns #${id}</div>
-                        <div class="card-answer">${item.a}</div>
-                    </div>
-                </div>
-            </div>
-        `;
-        grid.innerHTML += cardHTML;
-    });
-
-    updateProgress();
-
-    if (autoScroll) {
-        setTimeout(scrollToCards, 100);
-    }
-}
-
-/* FLIP CARD LOGIC */
-function flipCard(id) {
-    const cardEl = document.getElementById(`card-${id}`);
-    if (flippedSet.has(id)) {
-        flippedSet.delete(id);
-        cardEl.classList.remove("flipped");
-    } else {
-        flippedSet.add(id);
-        cardEl.classList.add("flipped");
-    }
-    updateProgress();
-}
-
-function updateProgress() {
-    const total = allData.length || 212;
-    const count = flippedSet.size;
-    const percentage = (count / total) * 100;
-    document.getElementById("progress-bar").style.width = percentage + "%";
-}
-
-/* SELECTARE CATEGORIE PRINCIPALĂ */
-function selectCategory(catIdx, autoScroll = false) {
-    activeCatIndex = catIdx;
-    document.getElementById("searchInput").value = "";
-    
-    const btns = document.querySelectorAll(".branch-btn");
-    btns.forEach((b, i) => {
-        if (i === catIdx) b.classList.add("active");
-        else b.classList.remove("active");
-    });
-
-    renderSubBranches(catIdx);
-    const cat = categoryStructure[catIdx];
-    const filtered = allData.filter(x => x.id >= cat.startId && x.id <= cat.endId);
-    renderCards(filtered, autoScroll);
-}
-
-function renderSubBranches(catIdx) {
-    const subContainer = document.getElementById("subBranches");
-    subContainer.innerHTML = "";
-    subContainer.classList.add("open");
-
-    const cat = categoryStructure[catIdx];
-    cat.subs.forEach(sub => {
-        const btn = document.createElement("button");
-        btn.className = "sub-btn";
-        btn.innerText = sub.name;
-        btn.onclick = () => filterByExactRange(sub.startId, sub.endId, btn, true);
-        subContainer.appendChild(btn);
-    });
-}
-
-/* FILTRARE STRICTĂ DUPĂ INTERVAL DE ID-URI */
-function filterByExactRange(startId, endId, btnEl = null, autoScroll = false) {
-    if (btnEl) {
-        document.querySelectorAll(".sub-btn").forEach(b => b.classList.remove("active"));
-        btnEl.classList.add("active");
-    }
-    document.getElementById("searchInput").value = "";
-    const filtered = allData.filter(x => x.id >= startId && x.id <= endId);
-    renderCards(filtered, autoScroll);
-}
-
-function showAllCards(autoScroll = false) {
-    document.querySelectorAll(".branch-btn").forEach(b => b.classList.remove("active"));
-    document.getElementById("subBranches").classList.remove("open");
-    document.getElementById("searchInput").value = "";
-    renderCards(allData, autoScroll);
-}
-
-/* CĂUTARE ÎN TIMP REAL */
-function filterCards() {
-    const query = document.getElementById("searchInput").value.toLowerCase().trim();
-    if (!query) {
-        selectCategory(activeCatIndex, false);
-        return;
-    }
-
-    const filtered = allData.filter(item => 
-        item.q.toLowerCase().includes(query) || 
-        item.a.toLowerCase().includes(query)
-    );
-    renderCards(filtered, true);
-}
-
-/* SALVARE PROGRES LOCAL */
-function saveBookmark() {
-    const savedIds = Array.from(flippedSet);
-    localStorage.setItem("flipped_cards", JSON.stringify(savedIds));
-    
-    const msg = document.getElementById("bookmarkMessage");
-    msg.innerText = `🔖 Progres salvat! (${flippedSet.size} carduri parcurse)`;
-    msg.style.opacity = 1;
-    setTimeout(() => { msg.style.opacity = 0; }, 2500);
-}
-
-function loadBookmark() {
-    const saved = localStorage.getItem("flipped_cards");
-    if (saved) {
-        const arr = JSON.parse(saved);
-        flippedSet = new Set(arr);
-        updateProgress();
-    }
-}
+let interval=null, time=1500, running=false, isWork=true;
+const timerDiv=document.getElementById("pomodoroTime");
+function updateTime(){timerDiv.innerText=String(Math.floor(time/60)).padStart(2,'0')+":"+String(time%60).padStart(2,'0');}
+function startPomodoro(){if(running) return; running=true; interval=setInterval(()=>{time--; updateTime(); if(time<=0){clearInterval(interval); if(isWork){isWork=false; time=300;} else {isWork=true; time=1500;} updateTime(); running=false; startPomodoro();}},1000);}
+function pausePomodoro(){if(running){running=false; clearInterval(interval);}}
+function stopPomodoro(){pausePomodoro(); isWork=true; time=1500; updateTime();}
+updateTime();
 </script>
 
-<script>
+    <script>
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("service-worker.js");
 }
