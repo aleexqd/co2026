@@ -127,6 +127,10 @@ html, body {
     max-width: 600px;
     margin-bottom: 20px;
 }
+.search-box form {
+    display: flex;
+    width: 100%;
+}
 .search-box input {
     width: 100%;
     padding: 12px 20px;
@@ -144,7 +148,7 @@ html, body {
     box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
 }
 
-/* 4. MIND MAP / ARBORE DE NAVIGARE */
+/* MIND MAP / ARBORE DE NAVIGARE */
 .mindmap-container {
     width: 100%;
     max-width: 1100px;
@@ -209,7 +213,7 @@ html, body {
     background: rgba(212,175,55,0.15);
 }
 
-/* 2. MODULE VIZUALE INTERACTIVE (TREIME, TAINE, TIMELINE) */
+/* MODULE VIZUALE INTERACTIVE */
 .interactive-section {
     width: 100%;
     max-width: 1100px;
@@ -236,17 +240,17 @@ html, body {
     letter-spacing: 1px;
 }
 
-/* SCUTUL CREDINȚEI - SF. TREIME */
+/* DIAGRAMA SFINTEI TREIMI - 3 CERCELE/BUTOANE */
 .scutum-fidei {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
 }
 .node {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     border: 2px solid var(--gold);
     background: radial-gradient(circle, rgba(212,175,55,0.2) 0%, rgba(10,8,6,0.9) 100%);
@@ -256,7 +260,7 @@ html, body {
     justify-content: center;
     text-align: center;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
     color: var(--gold-light);
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -264,10 +268,6 @@ html, body {
 .node:hover {
     transform: scale(1.08);
     box-shadow: 0 0 20px rgba(212,175,55,0.6);
-}
-.node.center {
-    border-color: #e74c3c;
-    background: radial-gradient(circle, rgba(231,76,60,0.25) 0%, rgba(10,8,6,0.9) 100%);
 }
 
 /* TAINELE BISERICII */
@@ -324,7 +324,7 @@ html, body {
     font-size: 15px;
 }
 
-/* 3. FLASHCARDS GRID (TOATE CARDS) */
+/* FLASHCARDS GRID */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -438,7 +438,7 @@ html, body {
 </head>
 <body>
 
-<!-- 5. BARĂ DE PROGRES -->
+<!-- BARĂ DE PROGRES -->
 <div id="progress-container"><div id="progress-bar"></div></div>
 
 <div class="top-bar">
@@ -463,10 +463,12 @@ html, body {
 
     <!-- CĂUTARE LIVE -->
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 Caută în întreaga învățătură..." oninput="filterCards()">
+        <form onsubmit="event.preventDefault(); filterCards();">
+            <input type="text" id="searchInput" placeholder="🔍 Caută în întreaga învățătură..." onkeyup="filterCards()" onchange="filterCards()">
+        </form>
     </div>
 
-    <!-- 4. ARBORE CONCEPTUAL (MIND MAP) -->
+    <!-- ARBORE CONCEPTUAL (MIND MAP) -->
     <div class="mindmap-container">
         <div class="main-branches">
             <button class="branch-btn active" onclick="selectCategory(0)">I. CREDINȚA</button>
@@ -477,60 +479,59 @@ html, body {
         <div class="sub-branches" id="subBranches"></div>
     </div>
 
-    <!-- 2. MODULE VIZUALE INTERACTIVE -->
+    <!-- MODULE VIZUALE INTERACTIVE -->
     <div class="interactive-section">
         
-        <!-- SCUTUL CREDINȚEI - SFÂNTA TREIME -->
+        <!-- SFÂNTA TREIME - DOAR CELE 3 BUTOANE/CERCELE -->
         <div class="section-box">
             <div class="section-title">☦️ Sfânta Treime</div>
             <div class="scutum-fidei">
-                <div class="node" onclick="filterByTopic('Tatăl')">TATĂL<br><small>Atotțiitorul</small></div>
-                <div class="node center" onclick="filterByTopic('Dumnezeu')">UNUL<br>DUMNEZEU</div>
-                <div class="node" onclick="filterByTopic('Iisus')">FIUL<br><small>Mântuitorul</small></div>
-                <div class="node" onclick="filterByTopic('Duhul')">DUHUL SFÂNT<br><small>Mângâietorul</small></div>
+                <div class="node" onclick="filterByExactRange(11, 14)">TATĂL<br><small>Atotțiitorul</small></div>
+                <div class="node" onclick="filterByExactRange(24, 34)">FIUL<br><small>Mântuitorul</small></div>
+                <div class="node" onclick="filterByExactRange(56, 60)">DUHUL SFÂNT<br><small>Făcătorul de viață</small></div>
             </div>
         </div>
 
-        <!-- TAINELE BISERICII -->
+        <!-- TAINELE BISERICII - FILTRARE EXACTĂ DUPĂ ID -->
         <div class="section-box">
             <div class="section-title">🕊️ Sfintele Taine</div>
             <div class="tainele-grid">
-                <div class="taina-card" onclick="filterByTopic('Botez')">💧 Botezul</div>
-                <div class="taina-card" onclick="filterByTopic('Mirunger')">🕊️ Mirungerea</div>
-                <div class="taina-card" onclick="filterByTopic('Pocăinț')">📖 Pocăința</div>
-                <div class="taina-card" onclick="filterByTopic('Împărtăș')">🍷 Euharistia</div>
-                <div class="taina-card" onclick="filterByTopic('Cununie')">👑 Cununia</div>
-                <div class="taina-card" onclick="filterByTopic('Preoț')">☦️ Preoția</div>
-                <div class="taina-card" onclick="filterByTopic('Maslu')">🌿 Maslul</div>
+                <div class="taina-card" onclick="filterByExactRange(74, 78)">💧 Botezul</div>
+                <div class="taina-card" onclick="filterByExactRange(79, 81)">🕊️ Mirungerea</div>
+                <div class="taina-card" onclick="filterByExactRange(82, 85)">📖 Pocăința</div>
+                <div class="taina-card" onclick="filterByExactRange(86, 90)">🍷 Euharistia</div>
+                <div class="taina-card" onclick="filterByExactRange(91, 94)">👑 Cununia</div>
+                <div class="taina-card" onclick="filterByExactRange(95, 97)">☦️ Preoția</div>
+                <div class="taina-card" onclick="filterByExactRange(98, 100)">🌿 Maslul</div>
             </div>
         </div>
 
-        <!-- 1. LINIA TIMPULUI (TIMELINE) -->
+        <!-- LINIA TIMPULUI - FILTRARE EXACTĂ DUPĂ ID -->
         <div class="section-box">
             <div class="section-title">📜 Istoria Mântuirii</div>
             <div class="timeline-scroll">
-                <div class="time-step" onclick="filterByTopic('facere')">
+                <div class="time-step" onclick="filterByExactRange(16, 17)">
                     <div class="step-title">1. Facerea</div>
                 </div>
-                <div class="time-step" onclick="filterByTopic('Adam')">
+                <div class="time-step" onclick="filterByExactRange(19, 20)">
                     <div class="step-title">2. Adam și Eva</div>
                 </div>
-                <div class="time-step" onclick="filterByTopic('păcat')">
+                <div class="time-step" onclick="filterByExactRange(21, 21)">
                     <div class="step-title">3. Căderea</div>
                 </div>
-                <div class="time-step" onclick="filterByTopic('Nașter')">
+                <div class="time-step" onclick="filterByExactRange(35, 36)">
                     <div class="step-title">4. Nașterea</div>
                 </div>
-                <div class="time-step" onclick="filterByTopic('Răstigni')">
+                <div class="time-step" onclick="filterByExactRange(38, 41)">
                     <div class="step-title">5. Răstignirea</div>
                 </div>
-                <div class="time-step" onclick="filterByTopic('Înviere')">
+                <div class="time-step" onclick="filterByExactRange(42, 44)">
                     <div class="step-title">6. Învierea</div>
                 </div>
-                <div class="time-step" onclick="filterByTopic('Înălța')">
+                <div class="time-step" onclick="filterByExactRange(45, 47)">
                     <div class="step-title">7. Înălțarea</div>
                 </div>
-                <div class="time-step" onclick="filterByTopic('Judecat')">
+                <div class="time-step" onclick="filterByExactRange(48, 55)">
                     <div class="step-title">8. Judecata</div>
                 </div>
             </div>
@@ -538,7 +539,7 @@ html, body {
 
     </div>
 
-    <!-- 3. GRILĂ FLASHCARDS -->
+    <!-- GRILĂ FLASHCARDS -->
     <div class="cards-grid" id="cardsGrid"></div>
 
 </div>
@@ -558,54 +559,72 @@ document.getElementById("bells").onclick = () => {
 };
 audio.onended = () => { bellsPlaying = false; };
 
-/* STRUCTURA CATEGORIILOR ȘI SUB-TEMELOR */
+/* STRUCTURĂ STRICTĂ A CATEGORIILOR ȘI SUB-TEMELOR (ID 1 - 212) */
 const categoryStructure = [
     {
         name: "I. CREDINȚA",
-        start: 0,
-        end: 111,
+        startId: 1,
+        endId: 112,
         subs: [
-            { name: "Descoperirea Dumnezeiască", start: 2, end: 9 },
-            { name: "Dumnezeu Tatăl", start: 10, end: 13 },
-            { name: "Sfânta Treime", start: 14, end: 14 },
-            { name: "Facerea & Îngerii", start: 15, end: 19 },
-            { name: "Căderea în Păcat", start: 20, end: 22 },
-            { name: "Iisus Hristos", start: 23, end: 54 },
-            { name: "Duhul Sfânt", start: 55, end: 59 },
-            { name: "Biserica", start: 60, end: 66 },
-            { name: "Sfintele Taine", start: 67, end: 100 },
-            { name: "Învierea & Viața Veșnică", start: 101, end: 111 }
+            { name: "Omul & Scopul vieții", startId: 1, endId: 2 },
+            { name: "Cele 3 Virtuți Teologice", startId: 3, endId: 10 },
+            { name: "Dumnezeu Tatăl", startId: 11, endId: 14 },
+            { name: "Sfânta Treime", startId: 15, endId: 15 },
+            { name: "Facerea Lumii", startId: 16, endId: 17 },
+            { name: "Îngerii", startId: 18, endId: 18 },
+            { name: "Adam și Eva", startId: 19, endId: 20 },
+            { name: "Căderea în Păcat", startId: 21, endId: 21 },
+            { name: "Așteptarea lui Mesia", startId: 22, endId: 23 },
+            { name: "Iisus Hristos", startId: 24, endId: 34 },
+            { name: "Nașterea Domnului", startId: 35, endId: 36 },
+            { name: "Maica Domnului", startId: 37, endId: 37 },
+            { name: "Răstignirea Domnului", startId: 38, endId: 41 },
+            { name: "Învierea Domnului", startId: 42, endId: 44 },
+            { name: "Înălțarea Domnului", startId: 45, endId: 47 },
+            { name: "Judecata de Apoi", startId: 48, endId: 55 },
+            { name: "Duhul Sfânt", startId: 56, endId: 60 },
+            { name: "Biserica", startId: 61, endId: 67 },
+            { name: "Sfintele Taine", startId: 68, endId: 73 },
+            { name: "Sfântul Botez", startId: 74, endId: 78 },
+            { name: "Sfânta Mirungere", startId: 79, endId: 81 },
+            { name: "Sfânta Pocăință", startId: 82, endId: 85 },
+            { name: "Sfânta Împărtășanie", startId: 86, endId: 90 },
+            { name: "Sfânta Cununie", startId: 91, endId: 94 },
+            { name: "Hirotonia", startId: 95, endId: 97 },
+            { name: "Sfântul Maslu", startId: 98, endId: 100 },
+            { name: "Învierea Morților", startId: 101, endId: 108 },
+            { name: "Viața Veșnică", startId: 109, endId: 112 }
         ]
     },
     {
         name: "II. NĂDEJDEA",
-        start: 112,
-        end: 146,
+        startId: 113,
+        endId: 147,
         subs: [
-            { name: "Rugăciunea", start: 112, end: 118 },
-            { name: "Tatăl Nostru", start: 119, end: 135 },
-            { name: "Fericirile", start: 136, end: 146 }
+            { name: "Rugăciunea", startId: 113, endId: 119 },
+            { name: "Tatăl Nostru", startId: 120, endId: 124 },
+            { name: "Cererile din Tatăl Nostru", startId: 125, endId: 136 },
+            { name: "Fericirile", startId: 137, endId: 147 }
         ]
     },
     {
         name: "III. DRAGOSTEA",
-        start: 147,
-        end: 211,
+        startId: 148,
+        endId: 212,
         subs: [
-            { name: "Iubirea Aproapelui", start: 147, end: 151 },
-            { name: "Cele 10 Porunci", start: 152, end: 189 },
-            { name: "Viața Creștină", start: 190, end: 194 },
-            { name: "Păcatul & Virtuțile", start: 195, end: 211 }
+            { name: "Iubirea Aproapelui", startId: 148, endId: 152 },
+            { name: "Cele 10 Porunci", startId: 153, endId: 190 },
+            { name: "Viața Creștină", startId: 191, endId: 195 },
+            { name: "Păcatul & Virtuțile", startId: 196, endId: 212 }
         ]
     }
 ];
 
 let allData = [];
-let currentFilteredData = [];
 let flippedSet = new Set();
 let activeCatIndex = 0;
 
-/* ÎNCĂRCARE DATE */
+/* ÎNCĂRCARE DATE JSON */
 fetch("catehism.json")
 .then(r => r.json())
 .then(data => {
@@ -615,14 +634,13 @@ fetch("catehism.json")
     loadBookmark();
 });
 
-/* RANDARE FLIP CARDS */
+/* RANDARE CARDS */
 function renderCards(dataList) {
-    currentFilteredData = dataList;
     const grid = document.getElementById("cardsGrid");
     grid.innerHTML = "";
 
     if (dataList.length === 0) {
-        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--gold);">Nu s-au găsit rezultate.</div>`;
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--gold); font-size:20px;">Nu s-a găsit nicio întrebare.</div>`;
         return;
     }
 
@@ -651,7 +669,7 @@ function renderCards(dataList) {
     updateProgress();
 }
 
-/* FLIP LOGIC & BARĂ PROGRES */
+/* FLIP CARD LOGIC */
 function flipCard(id) {
     const cardEl = document.getElementById(`card-${id}`);
     if (flippedSet.has(id)) {
@@ -671,7 +689,7 @@ function updateProgress() {
     document.getElementById("progress-bar").style.width = percentage + "%";
 }
 
-/* NAVIGARE & FILTRARE ARBORE CONCEPTUAL */
+/* SELECTARE CATEGORIE PRINCIPALĂ */
 function selectCategory(catIdx) {
     activeCatIndex = catIdx;
     document.getElementById("searchInput").value = "";
@@ -684,7 +702,7 @@ function selectCategory(catIdx) {
 
     renderSubBranches(catIdx);
     const cat = categoryStructure[catIdx];
-    const filtered = allData.filter(x => x.id >= (cat.start + 1) && x.id <= (cat.end + 1));
+    const filtered = allData.filter(x => x.id >= cat.startId && x.id <= cat.endId);
     renderCards(filtered);
 }
 
@@ -698,15 +716,19 @@ function renderSubBranches(catIdx) {
         const btn = document.createElement("button");
         btn.className = "sub-btn";
         btn.innerText = sub.name;
-        btn.onclick = () => filterSub(sub.start, sub.end, btn);
+        btn.onclick = () => filterByExactRange(sub.startId, sub.endId, btn);
         subContainer.appendChild(btn);
     });
 }
 
-function filterSub(startIdx, endIdx, btnEl) {
-    document.querySelectorAll(".sub-btn").forEach(b => b.classList.remove("active"));
-    btnEl.classList.add("active");
-    const filtered = allData.filter(x => x.id >= (startIdx + 1) && x.id <= (endIdx + 1));
+/* FILTRARE STRICTĂ DUPĂ INTERVAL DE ID-URI */
+function filterByExactRange(startId, endId, btnEl = null) {
+    if (btnEl) {
+        document.querySelectorAll(".sub-btn").forEach(b => b.classList.remove("active"));
+        btnEl.classList.add("active");
+    }
+    document.getElementById("searchInput").value = "";
+    const filtered = allData.filter(x => x.id >= startId && x.id <= endId);
     renderCards(filtered);
 }
 
@@ -717,13 +739,7 @@ function showAllCards() {
     renderCards(allData);
 }
 
-/* FILTRARE DUPĂ SUBIECT DIN MODULE INTERACTIVE */
-function filterByTopic(term) {
-    document.getElementById("searchInput").value = term;
-    filterCards();
-}
-
-/* CĂUTARE LIVE */
+/* CĂUTARE ÎN TIMP REAL */
 function filterCards() {
     const query = document.getElementById("searchInput").value.toLowerCase().trim();
     if (!query) {
@@ -738,7 +754,7 @@ function filterCards() {
     renderCards(filtered);
 }
 
-/* SEMN DE CARTE */
+/* SALVARE PROGRES LOCAL */
 function saveBookmark() {
     const savedIds = Array.from(flippedSet);
     localStorage.setItem("flipped_cards", JSON.stringify(savedIds));
@@ -767,5 +783,3 @@ if ("serviceWorker" in navigator) {
 
 </body>
 </html>
-
-```
