@@ -112,10 +112,11 @@ html, body{
     top: 50%;
     left: 15px;
     right: 15px;
-    height: 2px;
-    background: rgba(201, 162, 77, 0.25);
+    height: 3px;
+    background: rgba(255, 255, 255, 0.15);
     transform: translateY(-50%);
     z-index: 1;
+    transition: all 0.4s ease;
 }
 .progress-dots-container {
     width: 100%;
@@ -127,27 +128,78 @@ html, body{
 }
 .dot {
     border-radius: 50%;
-    background: #2a2015;
-    border: 1px solid #c9a24d;
+    background: #1a140e;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
     cursor: pointer;
 }
 .dot.small {
     width: 8px;
     height: 8px;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 .dot.large {
     width: 15px;
     height: 15px;
-    border: 2px solid #c9a24d;
-    box-shadow: 0 0 5px rgba(201, 162, 77, 0.4);
+    border-width: 2px;
 }
-.dot.active {
-    background: #ffd78c;
-    border-color: #fff;
-    box-shadow: 0 0 10px rgba(255, 215, 140, 0.9);
-    transform: scale(1.25);
+
+/* STILURI REGALE IN FUNCTIE DE CATEGORIE */
+
+/* CREDINTA - ROSU REGAL */
+.theme-credinta .progress-line-track {
+    background: rgba(231, 76, 60, 0.35);
+    box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+}
+.theme-credinta .dot {
+    border-color: #e74c3c;
+}
+.theme-credinta .dot.large {
+    box-shadow: 0 0 6px rgba(231, 76, 60, 0.6);
+}
+.theme-credinta .dot.active {
+    background: #ff5252;
+    border-color: #ffffff;
+    box-shadow: 0 0 14px rgba(231, 76, 60, 1), 0 0 6px rgba(255, 255, 255, 0.8);
+    transform: scale(1.35);
+    opacity: 1;
+}
+
+/* NADEJDEA - GALBEN REGAL */
+.theme-nadejdea .progress-line-track {
+    background: rgba(241, 196, 15, 0.35);
+    box-shadow: 0 0 8px rgba(241, 196, 15, 0.5);
+}
+.theme-nadejdea .dot {
+    border-color: #f1c40f;
+}
+.theme-nadejdea .dot.large {
+    box-shadow: 0 0 6px rgba(241, 196, 15, 0.6);
+}
+.theme-nadejdea .dot.active {
+    background: #ffeb3b;
+    border-color: #ffffff;
+    box-shadow: 0 0 14px rgba(241, 196, 15, 1), 0 0 6px rgba(255, 255, 255, 0.8);
+    transform: scale(1.35);
+    opacity: 1;
+}
+
+/* DRAGOSTEA - ALBASTRU REGAL */
+.theme-dragostea .progress-line-track {
+    background: rgba(52, 152, 219, 0.35);
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
+.theme-dragostea .dot {
+    border-color: #3498db;
+}
+.theme-dragostea .dot.large {
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.6);
+}
+.theme-dragostea .dot.active {
+    background: #00d2ff;
+    border-color: #ffffff;
+    box-shadow: 0 0 14px rgba(52, 152, 219, 1), 0 0 6px rgba(255, 255, 255, 0.8);
+    transform: scale(1.35);
     opacity: 1;
 }
 
@@ -316,8 +368,8 @@ line-height:1.6;
 
 <div class="card">
 
-<!-- BARA DE PROGRES ADDITIONATA FIX DEASUPRA QUESTION -->
-<div class="lesson-progress-bar">
+<!-- BARA DE PROGRES SI BULINE -->
+<div class="lesson-progress-bar" id="progressBar">
     <div class="progress-line-track"></div>
     <div class="progress-dots-container" id="progressDotsContainer"></div>
 </div>
@@ -361,9 +413,9 @@ audio.onended = () => {
 };
 
 const categories = [
-    {start:0,end:111,btn:".btn-credinta"},
-    {start:112,end:146,btn:".btn-nadejdea"},
-    {start:147,end:211,btn:".btn-dragostea"}
+    {start:0,end:111,btn:".btn-credinta", class:"theme-credinta"},
+    {start:112,end:146,btn:".btn-nadejdea", class:"theme-nadejdea"},
+    {start:147,end:211,btn:".btn-dragostea", class:"theme-dragostea"}
 ];
 
 let catIndex=0, current=0;
@@ -374,21 +426,23 @@ let answerVisible=false;
 let catehismData=[];
 
 function updateProgressBar() {
+    const progressBar = document.getElementById("progressBar");
     const dotsContainer = document.getElementById("progressDotsContainer");
-    if(!dotsContainer) return;
+    if(!dotsContainer || !progressBar) return;
+
+    // Aplicare tema de culoare specifice categoriei
+    progressBar.className = "lesson-progress-bar " + categories[catIndex].class;
     dotsContainer.innerHTML = "";
     
     const cat = categories[catIndex];
     const total = cat.end - cat.start + 1;
     const currentRel = current - cat.start;
     
-    // Numarul de buline afisate pe bara
     const numDots = 15;
     
     for(let i = 0; i < numDots; i++) {
         const dot = document.createElement("div");
         
-        // Buline mari la capitole/capete si la mijloc
         const isMajor = (i === 0 || i === Math.floor(numDots / 2) || i === numDots - 1);
         
         dot.className = "dot " + (isMajor ? "large" : "small");
