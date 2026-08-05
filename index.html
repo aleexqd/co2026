@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#080808">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<!-- Am adaugat fontul Cinzel pentru titluri/butoane si greutati mai vizibile pentru Cormorant Garamond -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
 <style>
     *{
@@ -16,13 +17,15 @@ html, body{
     margin:0;
     padding:0;
     overflow:hidden;
-    font-family:'Cormorant Garamond',serif;
+    font-family:'Cormorant Garamond', serif;
     background-image:url("PEISAJ.jpg");
     background-size:cover;
     background-position:center;
     background-attachment:fixed;
-    color:#f2e6c9;
+    color:#fff1d0; /* Nuanță mai luminoasă de auriu pentru lizibilitate maximă */
     height:100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 .overlay{
     min-height:100vh;
@@ -52,8 +55,12 @@ html, body{
     text-align:center;
     margin-top:12px;
     font-size:18px;
-    opacity:0.35;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    color: #e6c587;
+    opacity:0.6;
     flex-shrink:0;
+    letter-spacing: 1px;
 }
 
 #bookmark{
@@ -91,6 +98,7 @@ html, body{
     padding:8px 15px;
     border-radius:10px;
     font-size:16px;
+    font-family: 'Cinzel', serif;
     opacity:0;
     pointer-events:none;
     transition:opacity 0.3s;
@@ -206,10 +214,15 @@ html, body{
     .question{
 font-size:18px !important;
 line-height:1.5 !important;
-font-weight:600;
+font-weight:700; /* Font îngroșat pentru un plus de claritate */
+font-family: 'Cormorant Garamond', serif;
+letter-spacing: 0.3px;
+color: #ffffff;
+text-shadow: 0 1px 3px rgba(0,0,0,0.8);
 padding:18px;
 border-radius:12px;
-background:rgba(255,215,140,0.08);
+background:rgba(255,215,140,0.1);
+border: 1px solid rgba(201, 162, 77, 0.2);
 
 max-height:35%;
 overflow-y:auto;
@@ -223,7 +236,11 @@ overflow-x:hidden;
 padding-top:15px;
 padding-bottom:25px;
 font-size:20px;
-line-height:1.6;
+line-height:1.65;
+font-weight: 500; /* Greutate medie pentru o lectură fără efort */
+color: #fff2d6;
+text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+letter-spacing: 0.2px;
 }
     
 /* NAV */
@@ -232,12 +249,12 @@ line-height:1.6;
     display:flex;
     justify-content:space-between;
     font-size:24px;
-    opacity:0.55;
+    opacity:0.65;
     user-select:none;
     flex-shrink:0;
 }
 .nav-text span{ cursor:pointer; }
-.nav-text span:hover{ opacity:0.9; }
+.nav-text span:hover{ opacity:1; }
 
 /* WIDGETE */
 .widget{
@@ -250,10 +267,12 @@ line-height:1.6;
     box-shadow:0 0 15px rgba(0,0,0,0.7);
 }
 #pomodoro{ top:10px; left:10px; display:flex; align-items:center; gap:5px; z-index:20; }
-#pomodoroTime{ font-size:20px; font-weight:bold; min-width:50px; text-align:center; color:#f5deb3; }
+#pomodoroTime{ font-size:20px; font-weight:bold; font-family: 'Cinzel', serif; min-width:50px; text-align:center; color:#f5deb3; }
 #pomodoro button{
     padding:3px 6px;
     font-size:11px;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
     border-radius:6px;
     border:1px solid #b89b55;
     background:linear-gradient(180deg,#4a3820,#2e2314);
@@ -306,7 +325,9 @@ line-height:1.6;
 #overlayButtons button{
     padding:4px 10px;
     font-size:11px;
+    font-family: 'Cinzel', serif;
     font-weight:bold;
+    letter-spacing: 1px;
     border:none;
     border-radius:8px;
     cursor:pointer;
