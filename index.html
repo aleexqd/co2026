@@ -97,6 +97,60 @@ html, body{
     z-index:100;
 }
     
+/* BARA DE PROGRES SI BULINE */
+.lesson-progress-bar {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+}
+.progress-line-track {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background: rgba(201, 162, 77, 0.25);
+    transform: translateY(-50%);
+    z-index: 1;
+}
+.progress-dots-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+.dot {
+    border-radius: 50%;
+    background: #2a2015;
+    border: 1px solid #c9a24d;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.dot.small {
+    width: 8px;
+    height: 8px;
+    opacity: 0.5;
+}
+.dot.large {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #c9a24d;
+    box-shadow: 0 0 5px rgba(201, 162, 77, 0.4);
+}
+.dot.active {
+    background: #ffd78c;
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(255, 215, 140, 0.9);
+    transform: scale(1.25);
+    opacity: 1;
+}
+
     .question{
 font-size:18px !important;
 line-height:1.5 !important;
@@ -262,6 +316,12 @@ line-height:1.6;
 
 <div class="card">
 
+<!-- BARA DE PROGRES ADDITIONATA FIX DEASUPRA QUESTION -->
+<div class="lesson-progress-bar">
+    <div class="progress-line-track"></div>
+    <div class="progress-dots-container" id="progressDotsContainer"></div>
+</div>
+
 <div class="question" id="question"></div>
 <div class="answer" id="answer"></div>
 
@@ -313,6 +373,42 @@ const p=document.getElementById("pageIndicator");
 let answerVisible=false;
 let catehismData=[];
 
+function updateProgressBar() {
+    const dotsContainer = document.getElementById("progressDotsContainer");
+    if(!dotsContainer) return;
+    dotsContainer.innerHTML = "";
+    
+    const cat = categories[catIndex];
+    const total = cat.end - cat.start + 1;
+    const currentRel = current - cat.start;
+    
+    // Numarul de buline afisate pe bara
+    const numDots = 15;
+    
+    for(let i = 0; i < numDots; i++) {
+        const dot = document.createElement("div");
+        
+        // Buline mari la capitole/capete si la mijloc
+        const isMajor = (i === 0 || i === Math.floor(numDots / 2) || i === numDots - 1);
+        
+        dot.className = "dot " + (isMajor ? "large" : "small");
+        
+        const dotProgressRatio = i / (numDots - 1);
+        const currentProgressRatio = total > 1 ? (currentRel / (total - 1)) : 0;
+        
+        if (Math.abs(dotProgressRatio - currentProgressRatio) < (1 / numDots)) {
+            dot.classList.add("active");
+        }
+        
+        dot.onclick = () => {
+            current = cat.start + Math.round(dotProgressRatio * (total - 1));
+            load();
+        };
+        
+        dotsContainer.appendChild(dot);
+    }
+}
+
 function key(i){return "pagina_"+i;}
 function activateCategory(i){
     catIndex=i;
@@ -333,6 +429,7 @@ console.log("INTREBARE:", catehismData[current].q);
  answerVisible=true;
  showAnswer();
  p.innerText=`${current+1} / 212`;
+ updateProgressBar();
 }
 
     function save(){
